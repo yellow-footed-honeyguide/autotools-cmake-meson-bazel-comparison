@@ -62,7 +62,7 @@
 | wttr.in (2016) | | | | |
 | z (2009) | | | | |
 
-<br><br><br>
+
 ## Makefile depend on system
 
 a) Commands and utilities:
@@ -103,7 +103,7 @@ CFLAGS = -Wall -O2
 ```
 Windows (MSVC): 
 ```makefile CC = cl CFLAGS = /W3 /O2 ```
-<br><br><br>
+
 
 ## Perfomance
 
@@ -114,7 +114,7 @@ Windows (MSVC):
 
 
 
-# Build Systems Comparison
+## Build Systems Comparison
 
 | Aspect | Autotools | CMake | Meson | Bazel |
 |--------|-----------|-------|-------|-------|
