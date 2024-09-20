@@ -1,0 +1,86 @@
+# Set the minimum required version of CMake
+cmake_minimum_required(VERSION 3.0)
+
+# Define the project name
+project(TuringMachine)
+
+# Function to move the tape head right
+function(move_right)
+  # Add an underscore to the end of the tape
+  set(HEAD ${HEAD}_ PARENT_SCOPE)
+endfunction()
+
+# Function to move the tape head left
+function(move_left)
+  # Remove the first character from the tape
+  string(SUBSTRING ${HEAD} 1 -1 NEW_HEAD)
+  # Set the new tape content
+  set(HEAD ${NEW_HEAD} PARENT_SCOPE)
+endfunction()
+
+# Function to write a symbol on the tape
+function(write_symbol SYMBOL)
+  # Get all but the first character of the tape
+  string(SUBSTRING ${HEAD} 1 -1 TAIL)
+  # Write the new symbol and append the rest of the tape
+  set(HEAD "${SYMBOL}${TAIL}" PARENT_SCOPE)
+endfunction()
+
+# Main function to run the Turing machine
+function(run_turing_machine)
+  # Initialize the tape with a blank symbol
+  set(HEAD "_")
+  # Set the initial state
+  set(STATE "q0")
+  # Initialize step counter
+  set(STEP 0)
+  
+  # Run until we reach the halt state
+  while(NOT STATE STREQUAL "halt")
+    # Read the current symbol
+    string(SUBSTRING ${HEAD} 0 1 SYMBOL)
+    # Increment step counter
+    math(EXPR STEP "${STEP}+1")
+    
+    # Print current step information
+    message("Step ${STEP}:")
+    message("  Current State: ${STATE}")
+    message("  Tape Content: ${HEAD}")
+    message("  Current Symbol: ${SYMBOL}")
+    
+    # State transition logic
+    if(STATE STREQUAL "q0")
+      if(SYMBOL STREQUAL "_")
+        # If in state q0 and read blank, write 1, move right, go to q1
+        write_symbol("1")
+        move_right()
+        set(STATE "q1")
+        message("  Action: Write '1', Move Right, Go to state q1")
+      endif()
+    elseif(STATE STREQUAL "q1")
+      if(SYMBOL STREQUAL "_")
+        # If in state q1 and read blank, write 0, move left, halt
+        write_symbol("0")
+        move_left()
+        set(STATE "halt")
+        message("  Action: Write '0', Move Left, Halt")
+      else()
+        # If in state q1 and read non-blank, move right, stay in q1
+        move_right()
+        message("  Action: Move Right, Stay in state q1")
+      endif()
+    endif()
+    
+    # Print new state information
+    message("  New State: ${STATE}")
+    message("  New Tape Content: ${HEAD}")
+    message("")
+  endwhile()
+  
+  # Print final results
+  message("Turing Machine halted after ${STEP} steps.")
+  message("Final Tape Content: ${HEAD}")
+endfunction()
+
+# Run the Turing machine
+run_turing_machine()
