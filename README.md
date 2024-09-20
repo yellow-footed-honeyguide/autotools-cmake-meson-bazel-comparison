@@ -108,7 +108,23 @@ Windows (MSVC):
 ## Perfomance
 
 
+| Place | Tool | Reward |
+|-------|------------|---------|
+| 1     | Bazel      | 🏆🏆🏆   |
+| 2     | Meson      | 🏆🏆    |
+| 3     | CMake      | 🏆      |
+| 4     | Autotools  |         |
+
 ## Documentation
+
+| Place | Tool | Reward |
+|-------|------------|---------|
+| 1     | Meson      | 🏆🏆🏆   |
+| 2     | CMake      | 🏆🏆    |
+| 3     | Bazel      | 🏆     |
+| 4     | Autotools  |        |
+
+
 
 
 
